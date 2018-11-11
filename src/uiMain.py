@@ -5,8 +5,9 @@ import pgp
 import findPort
 import lifesaver
 import subprocess
+import time
 
-device_name = "/dev/ttyACM1"
+device_name = "/dev/ttyACM0"
 
 width = 20
 height = 4
@@ -34,7 +35,19 @@ while True:
         # serialSend.send("/dev/ttyACM1", str(pgp.encrypt(''.join(text))))
         print(''.join(text))
         cypherText = pgp.encrypt(''.join(text))
-        subprocess.call("echo '" + cypherText + "' >> /dev/ttyACM1", shell=True)
+#	print(repr(cypherText))
+
+	cypherText = cypherText.splitlines()
+	print(cypherText)
+#	print(cypherText[2])
+#	print(cypherText[3])
+#	print(cypherText[4])
+       	for line in cypherText:
+		time.sleep(0.75)
+		if line == '':
+			subprocess.call("echo ' ' >> /dev/ttyACM1", shell=True)
+		else:
+			subprocess.call("echo '" + line + "' >> /dev/ttyACM1", shell=True)
 
         text = []
 

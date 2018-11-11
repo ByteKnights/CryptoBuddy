@@ -1,5 +1,5 @@
 import gnupg
-gpg = gnupg.GPG(gnupghome='/home/pi/.gnupg')
+gpg = gnupg.GPG(gnupghome='/root/.gnupg')
 
 
 # def addKey(fingerprint, user):
